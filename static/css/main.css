@@ -1,0 +1,51 @@
+body{
+    font-family: 'Rubik';
+}
+a{
+    text-decoration: none;
+}
+.carousel-caption{
+    padding-top: 130px;
+    color: black;
+}
+.carousel-item{
+    height: 500px;
+}
+.continue-btn{
+    margin: 0 auto;
+}
+.card-img{
+    max-width: 100%;
+    padding: 10px;
+}
+.img-banner{
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+}
+.card-headline{
+    margin: 0 auto;
+    font-size: 25px;
+    color: red;
+}
+.height100 {
+    height: 100%;
+    }
+@media (min-width: 1000px) {
+body {
+padding-top: 80px
+}
+.navbar{
+    height: 80px;
+    background: #333;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 2;
+}
+.img-banner{
+    width: 60%;
+}
+}
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');

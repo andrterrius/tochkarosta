@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}{{headline}}{% endblock %}
+{% block content %}
+<p>Новость №{{page}}</p>
+<div class="new_container">
+    <span>{{data['headline']}}</span>
+    <p>{{data['text']}}</p>
+    {% for image in data['images'] %}
+    <img src="{{url_for('static', filename='images/' + image)}}" class= "card-img">
+    {% endfor %}
+</div>
+<a href="/#news_{{page}}" type="button" class="btn btn-danger">Вернуться к новостям</a>
+{% endblock %}
