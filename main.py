@@ -15,8 +15,7 @@ def get_news(page):
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    page = int(request.cookies.get('page', 1))
-    return render_template("index.html", news=get_news(page), page=page, count_news=db.get_count_news())
+    return render_template("index.html", news=get_news(1), page=1, count_news=db.get_count_news())
 @app.route("/news/<int:id>")
 def news(id):
     check = db.get_info_new(id)
@@ -43,7 +42,4 @@ def gallery():
 @app.route("/callback")
 def callback():
     return render_template("callback.html")
-@app.route("/ip", methods=["POST"])
-def ip():
-    return str(session['page'])
 app.run(debug=True, host='0.0.0.0', port=80)

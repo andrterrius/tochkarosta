@@ -1,6 +1,5 @@
 import time
 
-import psycopg2
 from psycopg2.extras import DictCursor
 from psycopg2.pool import SimpleConnectionPool
 class DB:
