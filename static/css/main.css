@@ -11,12 +11,15 @@ a{
 .continue-btn{
     margin: 0 auto;
 }
+.carousel{
+    position: relative;
+}
 .card-img{
     max-width: 100%;
     padding: 10px;
 }
 .banner-image{
-    margin-left: 10%;
+    margin-left: 50px;
 }
 .logo-image{
     width: 200px
