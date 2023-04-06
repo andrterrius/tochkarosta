@@ -1,7 +1,6 @@
 {% extends "base.html" %}
-{% block title %}Точка роста Красногвардейская гимназия{% endblock %}
+{% block title %}Точка роста | Красногвардейская гимназия{% endblock %}
 {% block content %}
-{% if page == 1 %}
 <div id="carousel" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
     <div class="carousel-item active">
@@ -33,21 +32,20 @@
 <span class="carousel-control-next-icon bg-danger" aria-hidden="true"></span>
 </a>
 </div>
-{% endif %}
 <div class="album py-5">
     <div class="container-fluid">
       <div class="row d-inline-flex">
           {% for new in news %}
             <div id="news_{{new['id']}}" class="col-12 col-sm-6 col-md-4 p-2">
                 <div class="card d-flex flex-column text-center height100">
-                  <a href="/news/{{new['id']}}" class="card-headline">{{new['headline']}}</a>
+                  <a href="/new/{{new['id']}}" class="card-headline">{{new['headline']}}</a>
                   {% if new['images'] %}
                   <img src="{{url_for('static', filename='images/' + new['images'][0])}}" class= "card-img">
                   {% endif %}
                   <div class="card-body">
                   <p class="card-text">{{new['text']}}</p>
                   <div class="d-flex">
-                      <a type="button" href="/news/{{new['id']}}" class="btn btn-danger continue-btn">Читать далее</a>
+                      <a type="button" href="/new/{{new['id']}}" class="btn btn-danger continue-btn">Читать далее</a>
                   </div>
                 </div>
                 </div>
@@ -56,5 +54,21 @@
       </div>
     </div>
 </div>
-<center>{% if page != 1 %}<a href="{{url_for('set_page', page=1)}}">1</a>{% endif %}<span>{{page}}...</span>{% if page != count_news %}<a href="{{url_for('set_page', page=count_news)}}">{{count_news}}</a>{% endif %}</center>
+<div class="pagination">
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">«</span>
+      </a>
+    </li>
+    <li class="page-item"><a class="page-link" href="{{url_for('news', page=1)}}">1</a></li>
+    <li class="page-item"><a class="page-link" href="{{url_for('news', page=2)}}">2</a></li>
+    <li class="page-item"><a class="page-link" href="{{url_for('news', page=3)}}">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">»</span>
+      </a>
+    </li>
+  </ul>
+</div>
 {% endblock %}

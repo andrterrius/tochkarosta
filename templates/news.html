@@ -1,13 +1,47 @@
 {% extends "base.html" %}
-{% block title %}{{headline}}{% endblock %}
+{% block title %}Новости | Точка роста | Красногвардейская гимназия{% endblock %}
 {% block content %}
-<p>Новость №{{page}}</p>
-<div class="new_container">
-    <span>{{data['headline']}}</span>
-    <p>{{data['text']}}</p>
-    {% for image in data['images'] %}
-    <img src="{{url_for('static', filename='images/' + image)}}" class= "card-img">
-    {% endfor %}
+<div class="album py-5">
+    <div class="container-fluid">
+      <div class="row d-inline-flex">
+        {% if news != 'error' %}
+          {% for new in news %}
+            <div id="news_{{new['id']}}" class="col-12 col-sm-6 col-md-4 p-2">
+                <div class="card d-flex flex-column text-center height100">
+                  <a href="/new/{{new['id']}}" class="card-headline">{{new['headline']}}</a>
+                  {% if new['images'] %}
+                  <img src="{{url_for('static', filename='images/' + new['images'][0])}}" class= "card-img">
+                  {% endif %}
+                  <div class="card-body">
+                  <p class="card-text">{{new['text']}}</p>
+                  <div class="d-flex">
+                      <a type="button" href="/new/{{new['id']}}" class="btn btn-danger continue-btn">Читать далее</a>
+                  </div>
+                </div>
+                </div>
+            </div>
+          {% endfor %}
+          {% else %}
+          <p>На данной странице нет новостей</p>
+          {% endif %}
+      </div>
+    </div>
 </div>
-<a href="/#news_{{page}}" type="button" class="btn btn-danger">Вернуться к новостям</a>
+<div class="pagination">
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">«</span>
+        </a>
+      </li>
+      <li class="page-item"><a class="page-link" href="{{url_for('news', page=1)}}">1</a></li>
+      <li class="page-item"><a class="page-link" href="{{url_for('news', page=2)}}">2</a></li>
+      <li class="page-item"><a class="page-link" href="{{url_for('news', page=3)}}">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">»</span>
+        </a>
+      </li>
+    </ul>
+  </div>
 {% endblock %}

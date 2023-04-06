@@ -15,19 +15,19 @@ def get_news(page):
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    print(request.args.get("page"))
-    return render_template("index.html", news=get_news(1), page=1, count_news=db.get_count_news())
-@app.route("/news/<int:id>")
-def news(id):
+    return render_template("index.html", news=get_news(1))
+@app.route("/new/<int:id>")
+def new_check(id):
     check = db.get_info_new(id)
     if check:
         return render_template("news.html", data=check, page=id)
     return redirect(url_for('index'))
-@app.route("/set_page/<int:page>")
-def set_page(page):
-    resp = make_response(redirect(url_for('index')))
-    resp.set_cookie('page', str(page), max_age=60)
-    return resp
+@app.route("/news")
+def news():
+    page = request.args.get("page")
+    if page:
+        return render_template("news.html", news=get_news(int(page)))
+    return "ok"
 @app.route("/about")
 def about():
     return render_template("about.html")

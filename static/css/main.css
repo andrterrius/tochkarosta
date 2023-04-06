@@ -36,6 +36,12 @@ a{
     font-size: 25px;
     color: red;
 }
+.pagination{
+    margin: 0 auto;
+}
+.page-link{
+    color: red;
+}
 .height100 {
     height: 100%;
 }
