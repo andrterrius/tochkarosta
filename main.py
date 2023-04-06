@@ -15,6 +15,7 @@ def get_news(page):
 
 @app.route("/", methods=["GET", "POST"])
 def index():
+    print(request.args.get("page"))
     return render_template("index.html", news=get_news(1), page=1, count_news=db.get_count_news())
 @app.route("/news/<int:id>")
 def news(id):

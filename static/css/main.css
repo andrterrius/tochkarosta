@@ -16,10 +16,17 @@ a{
 }
 .card-img{
     max-width: 100%;
-    padding: 10px;
+}
+.carousel-text{
+    margin: 0 auto;
+    text-align: center;
+    font-weight: bold;
+    color: red ;
 }
 .banner-image{
-    margin-left: 50px;
+    margin: 0 auto;
+    min-width: 50%;
+    max-height: 50%;
 }
 .logo-image{
     width: 200px
@@ -32,6 +39,9 @@ a{
 .height100 {
     height: 100%;
 }
-@media (min-width: 1000px) {
+@media (max-width: 1000px) {
+    .banner-image{
+        min-width: 75%;
+    }
 }
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');

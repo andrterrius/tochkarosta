@@ -2,34 +2,34 @@
 {% block title %}Точка роста Красногвардейская гимназия{% endblock %}
 {% block content %}
 {% if page == 1 %}
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+<div id="carousel" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
     <div class="carousel-item active">
     <img src="{{url_for('static', filename='images/banner_1.jpg')}}" class="d-block w-50 banner-image" alt="...">
-    <div class="carousel-caption d-none d-md-block">
-    <h5>First slide label</h5>
-    <p>Nulla vitae elit libero,</p>
+</div>
+<div class="carousel-item">
+  <img src="{{url_for('static', filename='images/banner_2.jpg')}}" class="d-block w-50 banner-image" alt="...">
+  <div class="carousel-text">
+    <p>специализированные кабинеты</p>
   </div>
 </div>
 <div class="carousel-item">
-  <img src="{{url_for('static', filename='images/banner_1.jpg')}}" class="d-block w-50 banner-image" alt="...">
-  <div class="carousel-caption d-none d-md-block">
-    <h5>Second slide label</h5>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+  <img src="{{url_for('static', filename='images/banner_3.jpg')}}" class="d-block w-50 banner-image" alt="...">
+  <div class="carousel-text">
+    <p>робототехника</p>
   </div>
 </div>
 <div class="carousel-item">
-  <img src="{{url_for('static', filename='images/banner_1.jpg')}}" class="d-block w-50 banner-image" alt="...">
-  <div class="carousel-caption d-none d-md-block">
-    <h5>Third slide label</h5>
-    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+  <img src="{{url_for('static', filename='images/banner_4.jpg')}}" class="d-block w-50 banner-image" alt="...">
+  <div class="carousel-text">
+    <p>возможность развития для каждого</p>
   </div>
 </div>
 </div>
-<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+<a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
 <span class="carousel-control-prev-icon bg-danger" aria-hidden="true"></span>
 </a>
-<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+<a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
 <span class="carousel-control-next-icon bg-danger" aria-hidden="true"></span>
 </a>
 </div>
