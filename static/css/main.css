@@ -31,6 +31,11 @@ a{
 .logo-image{
     width: 200px
 }
+.vk-logo{
+    width: 30px;
+    margin-right: 100px;
+    margin-left: 150px;
+}
 .card-headline{
     margin: 0 auto;
     font-size: 25px;
@@ -41,6 +46,12 @@ a{
 }
 .page-link{
     color: red;
+}
+.news-head{
+    font-weight: bold;
+    margin: 0 auto;
+    margin-top: 100px;
+    text-align: center;
 }
 .height100 {
     height: 100%;
