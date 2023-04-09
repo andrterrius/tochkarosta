@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Новости | Точка роста | Красногвардейская гимназия{% endblock %}
 {% block content %}
+<h5 class="news-head">НОВОСТИ </h5>
 <div class="album py-5">
     <div class="container-fluid">
       <div class="row d-inline-flex">
@@ -8,7 +9,7 @@
           {% for new in news %}
             <div id="news_{{new['id']}}" class="col-12 col-sm-6 col-md-4 p-2">
                 <div class="card d-flex flex-column text-center height100">
-                  <a href="/new/{{new['id']}}" class="card-headline">{{new['headline']}}</a>
+                  <a href="/new/{{new['id']}}" class="card-text color-red">{{new['header']}}</a>
                   {% if new['images'] %}
                   <img src="{{url_for('static', filename='images/' + new['images'][0])}}" class= "card-img">
                   {% endif %}
@@ -16,6 +17,10 @@
                   <p class="card-text">{{new['text']}}</p>
                   <div class="d-flex">
                       <a type="button" href="/new/{{new['id']}}" class="btn btn-danger continue-btn">Читать далее</a>
+                  </div>
+                  <div class="d-flex justify-content-around">
+                    <p class="card-date p-2">{{new['date'].strftime("%d.%m.%y")}}</p>
+                    <p class="card-date p-2">{{new['views']}} 👀</p>
                   </div>
                 </div>
                 </div>
@@ -29,19 +34,45 @@
 </div>
 <div class="pagination">
     <ul class="pagination">
+      {% if current_page == 1 %}
+      <li class="page-item active red"><span class="page-link color-red">1</span></li>
+      {% if pages > 3 %}
+      {% for i in range(2, 4) %}
+      <li class="page-item"><a class="page-link color-red" href="{{url_for('news', page=i)}}">{{i}}</a></li>
+      {% endfor %}
+      {% endif %}
+      <li class="page-item"><a class="page-link color-red" href="{{url_for('news', page=pages)}}">{{pages}}</a></li>
       <li class="page-item">
-        <a class="page-link" href="#" aria-label="Previous">
+      <a class="page-link color-red" href="{{url_for('news', page=2)}}" aria-label="Next">
+        <span aria-hidden="true">»</span>
+      </a>
+      </li>
+      {% else %}
+      <li class="page-item">
+        <a class="page-link color-red" href="{{url_for('news', page=current_page-1)}}" aria-label="Previous">
           <span aria-hidden="true">«</span>
         </a>
       </li>
-      <li class="page-item"><a class="page-link" href="{{url_for('news', page=1)}}">1</a></li>
-      <li class="page-item"><a class="page-link" href="{{url_for('news', page=2)}}">2</a></li>
-      <li class="page-item"><a class="page-link" href="{{url_for('news', page=3)}}">3</a></li>
+      {% if pages > 4 %}
+      {% for i in range(1, 4)%}
+      {% if i == current_page %}
+      <li class="page-item active red"><span class="page-link color-red">{{current_page}}</span></li>
+      {% else %}
+      <li class="page-item"><a class="page-link color-red" href="{{url_for('news', page=i)}}">{{i}}</a></li>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+      {% if current_page != pages %}
+      <li class="page-item"><a class="page-link color-red" href="{{url_for('news', page=pages)}}">{{pages}}</a></li>
+      {% endif %}
+      {% if pages > current_page %}
       <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
+        <a class="page-link color-red" href="{{url_for('news', page=current_page+1)}}" aria-label="Next">
           <span aria-hidden="true">»</span>
         </a>
       </li>
+      {% endif %}
+      {% endif %}
     </ul>
   </div>
 {% endblock %}

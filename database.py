@@ -11,25 +11,21 @@ class DB:
                 cursor.execute(sql, args)
                 if how == "all":
                     result = cursor.fetchall()
+                elif how == "update":
+                    result = conn.commit()
                 else:
                     result = cursor.fetchone()
                 self.pool.putconn(conn)
                 return result
     def get_news(self, limit, offset=0):
-        start = time.time()
-        f = self.execute("SELECT * FROM news ORDER BY id DESC LIMIT %s OFFSET %s", (limit, offset), "all")
-        print(time.time()-start)
-        return f
+        return self.execute("SELECT id, header, text, images, date, cardinality(views) as views FROM news ORDER BY id DESC LIMIT %s OFFSET %s", (limit, offset), "all")
+
+    def add_views(self, ip, limit, offset=0):
+        return self.execute("UPDATE news SET views = array_append(views, %s) WHERE id IN(SELECT id FROM news ORDER BY id DESC LIMIT %s OFFSET %s) and %s != ALL(views)", (ip, limit, offset, ip), "update")
+
+    def get_count_news_pages(self):
+        sql = self.execute("SELECT count(*) FROM news")
+        return sql['count'] // 9 if sql['count'] % 9 == 0 else (sql['count'] // 9) + 1
 
     def get_info_new(self, id):
-        start = time.time()
-        f = self.execute("SELECT * FROM news WHERE id = %s", (id,))
-        print(time.time()-start)
-        return f
-
-    def get_count_news(self):
-        start = time.time()
-        f = self.execute("SELECT count(*) FROM news")
-        count = (f['count'] // 10) + 1
-        print(time.time()-start)
-        return count
+        return self.execute("SELECT * FROM news WHERE id = %s", (id,))
