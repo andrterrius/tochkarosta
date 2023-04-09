@@ -1,30 +1,39 @@
-body{
+body {
     font-family: 'Rubik';
+    overflow-x: hidden;
 }
-a{
+a {
     text-decoration: none;
 }
-.carousel-caption{
+.navbar {
+    font-weight: bold;
+}
+.carousel-caption {
     color: black;
 }
 
-.continue-btn{
+.continue-btn {
     margin: 0 auto;
 }
-.carousel{
+.carousel {
     position: relative;
 }
-.card-img{
+.card-img {
     max-width: 100%;
 }
-.card-text{
-    font-size: small;
+.card-text {
+    font-size: medium;
 }
-.card-date{
+.card-date {
     left: 0;
     font-size: x-small;
 }
-.carousel-text{
+.card-headline {
+    margin: 0 auto;
+    font-size: larger;
+    color: red;
+}
+.carousel-text {
     margin: 0 auto;
     text-align: center;
     font-weight: bold;
@@ -33,41 +42,46 @@ a{
 .carousel-item {
     transition: 0.2s;
 }
-.banner-image{
+.carousel-inner {
+    max-height: 650px;
+}
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='red'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3e%3c/svg%3e");
+}
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='red'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+.banner-image {
     margin: 0 auto;
     min-width: 50%;
     max-height: 50%;
 }
-.logo-image{
+.logo-image {
     width: 200px
 }
-.vk-logo{
+.footer-logo {
     width: 30px;
     margin-right: 100px;
+    border-radius: 10%;
 }
-.footer-text{
+.footer-text {
     text-align: center;
     margin-left: 20px;
 }
-.card-headline{
-    margin: 0 auto;
-    font-size: 25px;
-    color: red;
-}
-.pagination{
+.pagination {
     margin: 0 auto;
 }
-.active>.page-link{
+.active>.page-link {
     background-color: red;
     border-color: rgba(73, 62, 62, 0.137);
 }
-.color-red{
+.color-red {
     color: red;
 }
-.color-red:hover{
+.color-red:hover {
     color: rgba(186, 25, 25, 0.925);
 }
-.news-head{
+.news-head {
     font-weight: bold;
     margin: 0 auto;
     margin-top: 100px;
@@ -76,14 +90,18 @@ a{
 .height100 {
     height: 100%;
 }
+.header-about {
+    font-size: 40px;
+    text-align: center;
+}
 @media (max-width: 1000px) {
-    .banner-image{
+    .banner-image {
         min-width: 75%;
     }
-    .logotips{
+    .logotips {
         margin-left: 25%;
     }
-    .footer-text{
+    .footer-text {
         margin-left: 35%;
     }
 }

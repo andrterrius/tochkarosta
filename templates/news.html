@@ -9,7 +9,7 @@
           {% for new in news %}
             <div id="news_{{new['id']}}" class="col-12 col-sm-6 col-md-4 p-2">
                 <div class="card d-flex flex-column text-center height100">
-                  <a href="/new/{{new['id']}}" class="card-text color-red">{{new['header']}}</a>
+                  <a href="/new/{{new['id']}}" class="card-text color-red card-headline">{{new['header']}}</a>
                   {% if new['images'] %}
                   <img src="{{url_for('static', filename='images/' + new['images'][0])}}" class= "card-img">
                   {% endif %}
