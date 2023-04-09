@@ -30,6 +30,9 @@ a{
     font-weight: bold;
     color: red ;
 }
+.carousel-item {
+    transition: 0.2s;
+}
 .banner-image{
     margin: 0 auto;
     min-width: 50%;

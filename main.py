@@ -7,6 +7,21 @@ import psycopg2
 from pymongo import DESCENDING
 import datetime
 app = Flask(__name__)
+
+def paginate(page, total_pages):
+    if total_pages <= 1:
+        return []
+    if total_pages <= 7:
+        pages = range(1, total_pages + 1)
+    elif page <= 4:
+        pages = range(1, 6)
+    elif page >= total_pages - 3:
+        pages = range(total_pages - 4, total_pages + 1)
+    else:
+        pages = range(page - 2, page + 3)
+
+    return pages
+
 def get_news(ip, page):
     news = db.get_news(9, (page-1)*9)
     if news:
@@ -16,7 +31,7 @@ def get_news(ip, page):
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    return render_template("index.html", news=get_news(request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr), 1), pages=db.get_count_news_pages())
+    return render_template("index.html", news=get_news(request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr), 1), current_page=1, total_pages=db.get_count_news_pages())
 @app.route("/new/<int:id>")
 def new_check(id):
     check = db.get_info_new(id)
@@ -27,7 +42,7 @@ def new_check(id):
 def news():
     page = request.args.get("page")
     if page:
-        return render_template("news.html", news=get_news(request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr), int(page)), current_page=int(page), pages=db.get_count_news_pages())
+        return render_template("news.html", news=get_news(request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr), int(page)), current_page=int(page), total_pages=db.get_count_news_pages())
 @app.route("/about")
 def about():
     return render_template("about.html")
