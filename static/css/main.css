@@ -12,6 +12,14 @@ a {
     color: black;
 }
 
+.featurette {
+    margin-left: 25px;
+}
+
+.map {
+    margin: 0 auto;
+}
+
 .continue-btn {
     margin: 0 auto;
 }
