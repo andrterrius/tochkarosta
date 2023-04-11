@@ -4,22 +4,22 @@
 <div id="carousel" class="carousel slide slide-fade" data-ride="carousel">
     <div class="carousel-inner">
     <div class="carousel-item active">
-    <img src="{{url_for('static', filename='images/banner_1.jpg')}}" class="d-block w-50 banner-image" alt="...">
+    <img src="{{url_for('static', filename='images/banners/banner_1.jpg')}}" class="d-block w-50 banner-image" alt="...">
 </div>
 <div class="carousel-item">
-  <img src="{{url_for('static', filename='images/banner_2.jpg')}}" class="d-block w-50 banner-image" alt="...">
+  <img src="{{url_for('static', filename='images/banners/banner_2.jpg')}}" class="d-block w-50 banner-image" alt="...">
   <div class="carousel-text">
     <p>специализированные кабинеты</p>
   </div>
 </div>
 <div class="carousel-item">
-  <img src="{{url_for('static', filename='images/banner_3.jpg')}}" class="d-block w-50 banner-image" alt="...">
+  <img src="{{url_for('static', filename='images/banners/banner_3.jpg')}}" class="d-block w-50 banner-image" alt="...">
   <div class="carousel-text">
     <p>робототехника</p>
   </div>
 </div>
 <div class="carousel-item">
-  <img src="{{url_for('static', filename='images/banner_4.jpg')}}" class="d-block w-50 banner-image" alt="...">
+  <img src="{{url_for('static', filename='images/banners/banner_4.jpg')}}" class="d-block w-50 banner-image" alt="...">
   <div class="carousel-text">
     <p>возможность развития для каждого</p>
   </div>
@@ -41,7 +41,7 @@
                 <div class="card d-flex flex-column text-center height100">
                   <a href="/new/{{new['id']}}" class="card-text color-red card-headline">{{new['header']}}</a>
                   {% if new['images'] %}
-                  <img src="{{url_for('static', filename='images/' + new['images'][0])}}" class= "card-img">
+                  <img src="{{url_for('static', filename='images/news/' + new['images'][0])}}" class= "card-img">
                   {% endif %}
                   <div class="card-body">
                   <p class="card-text">{{new['text']}}</p>

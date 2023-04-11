@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiыv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="icon" href="{{url_for('static', filename='images/icon.jpg')}}">
+    <link rel="icon" href="{{url_for('static', filename='images/banners/icon.jpg')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
     <link rel='stylesheet' href="{{url_for('static', filename='css/main.css')}}">
@@ -17,7 +17,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
-      <img src="{{url_for('static', filename='images/logo.png')}}" class="d-inline-block align-text-top logo-image">
+      <img src="{{url_for('static', filename='images/banners/logo.png')}}" class="d-inline-block align-text-top logo-image">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -64,8 +64,8 @@
   </div>
 
   <ul class="nav col-md-4 justify-content-end list-unstyled d-flex logotips">
-    <li class="ms-2"><a href="https://vk.com/public198226931" target="_blank"><img class="footer-logo" src="{{url_for('static', filename='images/vk-logo.png')}}" alt="Сообщество ВК"></a></li>
-    <li class="ms-2"><a href="http://ksoh2.ucoz.ru" target="_blank"><img class="footer-logo" src="{{url_for('static', filename='images/school-logo.jpg')}}" alt="Сайт школы"></a></li>
+    <li class="ms-2"><a href="https://vk.com/public198226931" target="_blank"><img class="footer-logo" src="{{url_for('static', filename='images/banners/vk-logo.png')}}" alt="Сообщество ВК"></a></li>
+    <li class="ms-2"><a href="http://ksoh2.ucoz.ru" target="_blank"><img class="footer-logo" src="{{url_for('static', filename='images/banners/school-logo.jpg')}}" alt="Сайт школы"></a></li>
   </ul>
 </footer>
 <!-- Yandex.Metrika counter -->

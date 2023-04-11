@@ -1,5 +1,85 @@
 {% extends "base.html" %}
-{% block title %}Мероприятия| Точка роста Красногвардейская гимназия{% endblock %}
+{% block title %}Мероприятия | Точка роста | Красногвардейская гимназия{% endblock %}
 {% block content %}
-<p1>мероприятия</p1>
+<h5 class="news-head">Мероприятия</h5>
+<div class="album py-5">
+    <div class="container-fluid">
+      <div class="row d-inline-flex">
+        {% if news != 'error' %}
+          {% for new in news %}
+            <div id="news_{{new['id']}}" class="col-12 col-sm-6 col-md-4 p-2">
+                <div class="card d-flex flex-column text-center height100">
+                  <a href="/event/{{new['id']}}" class="card-text color-red card-headline">{{new['header']}}</a>
+                  {% if new['images'] %}
+                  <img src="{{url_for('static', filename='images/' + new['images'][0])}}" class= "card-img">
+                  {% endif %}
+                  <div class="card-body">
+                  <p class="card-text">{{new['text']}}</p>
+                  <div class="d-flex">
+                      <a type="button" href="/event/{{new['id']}}" class="btn btn-danger continue-btn">Читать далее</a>
+                  </div>
+                  <div class="d-flex justify-content-around">
+                    <p class="card-date p-2">{{new['date'].strftime("%d.%m.%y")}}</p>
+                    <p class="card-date p-2">{{new['views']}} 👀</p>
+                  </div>
+                </div>
+                </div>
+            </div>
+          {% endfor %}
+          {% else %}
+          <p>На данной странице нет мероприятий</p>
+          {% endif %}
+      </div>
+    </div>
+</div>
+<div class="pagination">
+  <ul class="pagination">
+    {% if current_page != 1 %}
+    <li class="page-item">
+      <a class="page-link color-red" href="{{url_for('news', page=current_page-1)}}" aria-label="Previous">
+        <span aria-hidden="true">«</span>
+      </a>
+    </li>
+    {% endif %}
+    {% if current_page == 1 %}
+    <li class="page-item active"><span class="page-link color-red">{{ current_page }}</span></li>
+    {% if total_pages > 3 %}
+    {% for i in range(2, 4) %}
+    <li class="page-item"><a class="page-link color-red" href="{{ url_for('news', page=i) }}">{{ i }}</a></li>
+    {% endfor %}
+    {% endif %}
+    {% if total_pages > 4 %}
+    <li class="page-item disabled"><span class="page-link">...</span></li>
+    {% endif %}
+    <li class="page-item"><a class="page-link color-red" href="{{ url_for('news', page=total_pages) }}">{{ total_pages }}</a></li>
+    {% else %}
+    {% if current_page > 2 %}
+    <li class="page-item"><a class="page-link color-red" href="{{ url_for('news', page=1) }}">1</a></li>
+    {% endif %}
+    {% if current_page > 3 %}
+    <li class="page-item disabled"><span class="page-link">...</span></li>
+    {% endif %}
+    {% for i in range(current_page - 1, current_page + 2) if i > 0 and i <= total_pages %}
+    {% if i == current_page %}
+    <li class="page-item active"><span class="page-link color-red">{{ i }}</span></li>
+    {% else %}
+    <li class="page-item"><a class="page-link color-red" href="{{ url_for('news', page=i) }}">{{ i }}</a></li>
+    {% endif %}
+    {% endfor %}
+    {% if current_page < total_pages - 2 %}
+    <li class="page-item disabled"><span class="page-link">...</span></li>
+    {% endif %}
+    {% if current_page < total_pages - 1 %}
+    <li class="page-item"><a class="page-link color-red" href="{{ url_for('news', page=total_pages) }}">{{ total_pages }}</a></li>
+    {% endif %}
+    {% endif %}
+    {% if total_pages > current_page %}
+      <li class="page-item">
+        <a class="page-link color-red" href="{{url_for('news', page=current_page+1)}}" aria-label="Next">
+          <span aria-hidden="true">»</span>
+        </a>
+      </li>
+      {% endif %}
+  </ul>
+</div>
 {% endblock %}

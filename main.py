@@ -8,41 +8,36 @@ from pymongo import DESCENDING
 import datetime
 app = Flask(__name__)
 
-def paginate(page, total_pages):
-    if total_pages <= 1:
-        return []
-    if total_pages <= 7:
-        pages = range(1, total_pages + 1)
-    elif page <= 4:
-        pages = range(1, 6)
-    elif page >= total_pages - 3:
-        pages = range(total_pages - 4, total_pages + 1)
-    else:
-        pages = range(page - 2, page + 3)
-
-    return pages
-
 def get_news(ip, page):
     news = db.get_news(9, (page-1)*9)
     if news:
-        db.add_views(ip, 9, (page - 1) * 9)
+        db.add_views_news(ip, 9, (page - 1) * 9)
         return news
     return "error"
 
+def get_events(ip, page):
+    events = db.get_events(9, (page-1)*9)
+    if news:
+        db.add_views_events(ip, 9, (page - 1) * 9)
+        return events
+    return "error"
+
+def get_general(*args):
+    return render_template("index.html", news=get_news(request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr), 1), current_page=1, total_pages=db.get_count_news_pages())
+
 @app.route("/", methods=["GET", "POST"])
 def index():
-    return render_template("index.html", news=get_news(request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr), 1), current_page=1, total_pages=db.get_count_news_pages())
+    return get_general()
 @app.route("/new/<int:id>")
 def new_check(id):
     check = db.get_info_new(id)
     if check:
         return render_template("new.html", data=check, page=id)
-    return render_template("index.html", news=get_news(request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr), 1))
+    return get_general()
 @app.route("/news")
 def news():
-    page = request.args.get("page")
-    if page:
-        return render_template("news.html", news=get_news(request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr), int(page)), current_page=int(page), total_pages=db.get_count_news_pages())
+    page = request.args.get("page", 1)
+    return render_template("news.html", news=get_news(request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr), int(page)), current_page=int(page), total_pages=db.get_count_news_pages())
 @app.route("/about")
 def about():
     return render_template("about.html")
@@ -51,7 +46,14 @@ def teachers():
     return render_template("teachers.html")
 @app.route("/events")
 def events():
-    return render_template("events.html")
+    page = request.args.get("page", 1)
+    return render_template("events.html", news=get_events(request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr), int(page)), current_page=int(page), total_pages=db.get_count_events_pages())
+@app.route("/event/<int:id>")
+def event_check(id):
+    check = db.get_info_event(id)
+    if check:
+        return render_template("event.html", data=check, page=id)
+    return get_general()
 @app.route("/gallery")
 def gallery():
     return render_template("gallery.html")
