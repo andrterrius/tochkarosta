@@ -1,13 +1,12 @@
 import time
-
 from flask import Flask, render_template, url_for, request, session, send_file, redirect, make_response
+from jinja2 import Template
 from config import *
 from psycopg2.extras import DictCursor
 import psycopg2
 from pymongo import DESCENDING
 import datetime
 app = Flask(__name__)
-
 def get_news(ip, page):
     news = db.get_news(9, (page-1)*9)
     if news:
@@ -25,7 +24,7 @@ def get_events(ip, page):
 def get_general(*args):
     return render_template("index.html", news=get_news(request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr), 1), current_page=1, total_pages=db.get_count_news_pages())
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 def index():
     return get_general()
 @app.route("/new/<int:id>")
@@ -47,7 +46,7 @@ def teachers():
 @app.route("/events")
 def events():
     page = request.args.get("page", 1)
-    return render_template("events.html", news=get_events(request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr), int(page)), current_page=int(page), total_pages=db.get_count_events_pages())
+    return render_template("events.html", events=get_events(request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr), int(page)), current_page=int(page), total_pages=db.get_count_events_pages())
 @app.route("/event/<int:id>")
 def event_check(id):
     check = db.get_info_event(id)
@@ -56,8 +55,17 @@ def event_check(id):
     return get_general()
 @app.route("/gallery")
 def gallery():
-    return render_template("gallery.html")
+    return render_template("gallery.html", images=db.get_images(10, 0))
 @app.route("/callback")
 def callback():
     return render_template("callback.html")
+@app.route("/api/get_images", methods=["POST"])
+def get_images():
+    try:
+        images = db.get_images(10, request.form['offset'])
+        if images:
+            return {"success": True, "code": Template(template_images).render(images=images), "count": 2}
+        return {"error": "Изоображения не найдены"}
+    except:
+        return {"error": "Ошибка со стороны сервера"}
 app.run(debug=True, host='0.0.0.0', port=80)

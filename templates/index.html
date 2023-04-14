@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Главная | Точка роста | Красногвардейская гимназия{% endblock %}
+{% block title %}Главная | Точка роста Красногвардейская гимназия{% endblock %}
 {% block content %}
 <div id="carousel" class="carousel slide slide-fade" data-ride="carousel">
     <div class="carousel-inner">
@@ -41,7 +41,7 @@
                 <div class="card d-flex flex-column text-center height100">
                   <a href="/new/{{new['id']}}" class="card-text color-red card-headline">{{new['header']}}</a>
                   {% if new['images'] %}
-                  <img src="{{url_for('static', filename='images/news/' + new['images'][0])}}" class= "card-img">
+                  <img src="{{url_for('static', filename='images/news/' + new['images'][0])}}" class= "card-img zoom-img">
                   {% endif %}
                   <div class="card-body">
                   <p class="card-text">{{new['text']}}</p>

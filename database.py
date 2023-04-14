@@ -23,6 +23,15 @@ class DB:
     def get_events(self, limit, offset=0):
         return self.execute("SELECT id, header, text, images, date, cardinality(views) as views FROM events ORDER BY id DESC LIMIT %s OFFSET %s", (limit, offset), "all")
 
+    def get_images(self, limit, offset=0):
+        sql = self.execute("SELECT images FROM news ORDER BY id DESC LIMIT %s OFFSET %s", (limit, offset), "all")
+        if sql:
+            images = []
+            for imags in sql:
+                for image in imags[0]:
+                    images.append(image)
+            return images
+
     def add_views_news(self, ip, limit, offset=0):
         return self.execute("UPDATE news SET views = array_append(views, %s) WHERE id IN(SELECT id FROM news ORDER BY id DESC LIMIT %s OFFSET %s) and %s != ALL(views)", (ip, limit, offset, ip), "update")
 
