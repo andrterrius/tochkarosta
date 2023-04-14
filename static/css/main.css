@@ -39,7 +39,7 @@ a {
 .card-headline {
     margin: 0 auto;
     font-size: larger;
-    color: red;
+    font-weight: bold;
 }
 .carousel-text {
     margin: 0 auto;
