@@ -33,7 +33,3 @@ $('#checkbtn').on('click', function(){
 
     });
 });
-
-$('#goback').on('click', function(){
-    history.back();
-});

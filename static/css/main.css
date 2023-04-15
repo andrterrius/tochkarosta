@@ -17,9 +17,6 @@ a {
 .map {
     margin: 0 auto;
 }
-.carousel-caption {
-    color: black;
-}
 .continue-btn {
     margin: 0 auto;
 }
@@ -89,7 +86,7 @@ a {
 .color-red:hover {
     color: rgba(186, 25, 25, 0.925);
 }
-.news-head {
+.page-head {
     font-weight: bold;
     margin: 0 auto;
     margin-top: 100px;
@@ -126,6 +123,9 @@ a {
     margin-left:auto;
     margin-right:auto;
     max-width: 50%;
+}
+.callback-table {
+    font-size: large;
 }
 @media (max-width: 1000px) {
     .modal-dialog {

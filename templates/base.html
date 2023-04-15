@@ -28,7 +28,7 @@
             <a class="nav-link active" aria-current="page" href="/">Главная</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href=/about>О центре</a>
+          <a class="nav-link" href=/about>О Центре</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href=/teachers>Педагоги</a>
@@ -40,7 +40,7 @@
           <a class="nav-link" href=/gallery>Галерея</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href=/callback>Обратная связь</a>
+          <a class="nav-link" href=/feedback>Обратная связь</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="https://vk.com/public198226931" target="_blank">Сообщество ВК</a>
@@ -67,6 +67,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 {% block content %}
 {% endblock %}
+<script src="{{url_for('static', filename='js/main.js')}}"></script>
 <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
   <div class="col-md-4 d-flex align-items-center">
     <span class="text-muted footer-text">© 2023 Точка роста, <br> МБОУ "Красногвардейская гимназия"</span>
@@ -91,6 +92,5 @@
         accurateTrackBounce:true
    });
 </script>
-<script src="{{url_for('static', filename='js/main.js')}}"></script>
 </body>
 </html>

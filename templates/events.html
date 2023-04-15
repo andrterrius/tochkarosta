@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Мероприятия | Точка роста | Красногвардейская гимназия{% endblock %}
 {% block content %}
-<h5 class="news-head">Мероприятия</h5>
+<h5 class="page-head">Мероприятия</h5>
 <div class="album py-5">
     <div class="container-fluid">
       <div class="row d-inline-flex">
@@ -34,6 +34,9 @@
 </div>
 <div class="pagination">
   <ul class="pagination">
+    {% if total_pages == 1 %}
+    <li class="page-item active"><span class="page-link color-red">1</span></li>
+    {% else %}
     {% if current_page != 1 %}
     <li class="page-item">
       <a class="page-link color-red" href="{{url_for('events', page=current_page-1)}}" aria-label="Previous">
@@ -80,6 +83,7 @@
         </a>
       </li>
       {% endif %}
+    {% endif %}
   </ul>
 </div>
 {% endblock %}
