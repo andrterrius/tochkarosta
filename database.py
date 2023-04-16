@@ -18,13 +18,13 @@ class DB:
                 self.pool.putconn(conn)
                 return result
     def get_news(self, limit, offset=0):
-        return self.execute("SELECT id, header, text, images, date, cardinality(views) as views FROM news ORDER BY id DESC LIMIT %s OFFSET %s", (limit, offset), "all")
+        return self.execute("SELECT id, header, text, slicedtext, images, date, cardinality(views) as views FROM news WHERE show = true ORDER BY id DESC LIMIT %s OFFSET %s", (limit, offset), "all")
 
     def get_events(self, limit, offset=0):
-        return self.execute("SELECT id, header, text, images, date, cardinality(views) as views FROM events ORDER BY id DESC LIMIT %s OFFSET %s", (limit, offset), "all")
+        return self.execute("SELECT id, header, text, slicedtext, images, date, cardinality(views) as views FROM events WHERE show = true ORDER BY id DESC LIMIT %s OFFSET %s", (limit, offset), "all")
 
     def get_images(self, limit, offset=0):
-        sql = self.execute("SELECT images FROM news ORDER BY id DESC LIMIT %s OFFSET %s", (limit, offset), "all")
+        sql = self.execute("SELECT images FROM news WHERE show = true ORDER BY id DESC LIMIT %s OFFSET %s", (limit, offset), "all")
         if sql:
             images = []
             for imags in sql:
@@ -39,15 +39,15 @@ class DB:
         return self.execute("UPDATE events SET views = array_append(views, %s) WHERE id IN(SELECT id FROM events ORDER BY id DESC LIMIT %s OFFSET %s) and %s != ALL(views)", (ip, limit, offset, ip), "update")
 
     def get_count_news_pages(self):
-        sql = self.execute("SELECT count(*) FROM news")
+        sql = self.execute("SELECT count(*) FROM news WHERE show = true")
         return sql['count'] // 9 if sql['count'] % 9 == 0 else (sql['count'] // 9) + 1
 
     def get_count_events_pages(self):
-        sql = self.execute("SELECT count(*) FROM events")
+        sql = self.execute("SELECT count(*) FROM events WHERE show = true")
         return sql['count'] // 9 if sql['count'] % 9 == 0 else (sql['count'] // 9) + 1
 
     def get_info_new(self, id):
-        return self.execute("SELECT * FROM news WHERE id = %s", (id,))
+        return self.execute("SELECT * FROM news WHERE id = %s AND show = true", (id,))
 
     def get_info_event(self, id):
-        return self.execute("SELECT * FROM events WHERE id = %s", (id,))
+        return self.execute("SELECT * FROM events WHERE id = %s AND show = true", (id,))

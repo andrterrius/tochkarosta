@@ -11,10 +11,10 @@
                 <div class="card d-flex flex-column text-center height100">
                   <a href="/event/{{event['id']}}" class="card-text color-red card-headline">{{event['header']}}</a>
                   {% if event['images'] %}
-                  <img src="{{url_for('static', filename='images/events/' + event['images'][0])}}" class= "card-img zoom-img">
+                  <img src="{{url_for('static', filename='images/events/' + event['images'][0])}}" class= "card-img img-fluid zoom-img">
                   {% endif %}
                   <div class="card-body">
-                  <p class="card-text">{{event['text']}}</p>
+                  <p class="card-text">{{event['slicedtext']}}</p>
                   <div class="d-flex">
                       <a type="button" href="/event/{{event['id']}}" class="btn btn-danger continue-btn">Читать далее</a>
                   </div>
