@@ -1,12 +1,11 @@
 import time
+import psycopg2
+import datetime
+from config import *
 from flask import Flask, render_template, url_for, request, session, send_file, redirect, make_response
 from jinja2 import Template
 from werkzeug.exceptions import HTTPException
-from config import *
 from psycopg2.extras import DictCursor
-import psycopg2
-from pymongo import DESCENDING
-import datetime
 
 app = Flask(__name__)
 
@@ -76,7 +75,8 @@ def event_check(id):
 
 @app.route("/gallery")
 def gallery():
-    return render_template("gallery.html", images=db.get_images(10, 0))
+    images = db.get_images(10, 0)
+    return render_template("gallery.html", images=db.get_images(10, 0), offset=len(images))
 
 
 @app.route("/feedback")
@@ -89,7 +89,7 @@ def get_images():
     try:
         images = db.get_images(10, request.form['offset'])
         if images:
-            return {"success": True, "code": Template(template_images).render(images=images), "count": 2}
+            return {"success": True, "code": Template(template_images).render(images=images)}
         return {"error": "Изоображения не найдены"}
     except:
         return {"error": "Ошибка со стороны сервера"}

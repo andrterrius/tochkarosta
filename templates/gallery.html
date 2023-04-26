@@ -14,6 +14,34 @@
         {% endfor %}
     </div>
 </div>
+<script>
+    var offset = {{offset}};
+    $('#checkbtn').on('click', function(){
+    $.ajax({
+        url: "api/get_images",
+        type: "POST",
+        data: {
+            offset: offset,
+        },
+        success: function(data) {
+            if (data['success']){
+                $('.row').append(data['code']);
+                offset += 10;
+            }
+            else{
+                $('#checkbtn').css("display", "None");
+                swal({
+                    title: 'Произошла ошибка',
+                    text: data['error'],
+                    confirmButtonText: 'ОК',
+                    confirmButtonColor: "red"
+                });
+            }
+        }
+
+    });
+    });
+</script>
 <div class="d-flex justify-content-center">
     <button class="btn btn-danger" id="checkbtn">Загрузить еще...</button>
 </div>

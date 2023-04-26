@@ -25,9 +25,14 @@ a {
 }
 .card-img {
     display:block;
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
     max-height: 300px;
+    width: auto;
+}
+.next-img {
+    display:block;
+    margin: auto;
+    max-height: 1000px;
     width: auto;
 }
 .card-text {
@@ -147,6 +152,5 @@ a {
     .footer-text {
         margin-left: 35%;
     }
-
 }
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
